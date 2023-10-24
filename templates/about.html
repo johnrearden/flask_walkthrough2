@@ -1,4 +1,40 @@
 {% extends 'base.html' %}
 {% block content %}
-<h2>About Page</h2>
+
+<h2>{{ page_title }} Page</h2>
+
+{% for member in company %}
+    {% if loop.index % 2 == 0 %}
+        <div class="row featurette">
+            <div class="col-md-7">
+                <h3>{{ loop.index }} . {{ member.name }}</h3>
+                <p>{{ member.description }}</p>
+            </div>
+            <div class="col-md-5">
+                <img class="featurette-image image-responsive"
+                    src="{{ member.image_source }}"
+                    alt="Image of {{ member.name }}">
+            </div>
+        </div>
+        {% if loop.index != loop.length %}
+            <hr class="featurette-divider">
+        {% endif %}
+    {% else %}
+    <div class="row featurette">
+        <div class="col-md-5">
+            <img class="featurette-image image-responsive"
+                src="{{ member.image_source }}"
+                alt="Image of {{ member.name }}">
+        </div>
+        <div class="col-md-7">
+            <h3>{{ loop.index }} . {{ member.name }}</h3>
+            <p>{{ member.description }}</p>
+        </div>
+    </div>
+        {% if loop.index != loop.length %}
+            <hr class="featurette-divider">
+        {% endif %}
+    {% endif %}
+{% endfor %}
+    
 {% endblock %}
